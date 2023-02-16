@@ -9,20 +9,14 @@ from name import Name
 #from mqtt import MQTT
 from task import Scheduler
 #import ntptime
-
-
-from bme680i import BME680_I2C
-from machine import I2C, Pin
-import time
-bme = BME680_I2C(I2C(-1, Pin(22), Pin(21)))
-
+from ewh_bme import BMESensor
 
 network = Network()
 board = Board(network)
 board.init()
 
+bmesensor = BMESensor(board.display)
 heartbeat = Heartbeat(board.display)
-
 
 scheduler = Scheduler()
 
@@ -30,12 +24,8 @@ name = Name(board.display)
 scheduler.register(board.display)
 scheduler.register(heartbeat)
 scheduler.register(network)
+scheduler.register(bmesensor)
 
 print("Starting scheduler!")
 
 scheduler.start(100)
-
-# #for _ in range(3):
-# while True:
-#     print(bme.temperature, bme.humidity, bme.pressure, bme.gas)
-#     time.sleep(1)
