@@ -1,0 +1,13 @@
+/.DS_Store
+
+/.vscode/
+.venv/**
+
+/firmware/wlan.json
+
+/.env
+
+/deploy/**
+
+/config/ewhome_**
+/config/raeume**
